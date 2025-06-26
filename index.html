@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>JavaScript Utility Toolkit</title>
+ 
+</head>
+<body>
+
+  <h1 style="margin-left: 140px;" >Age to Days Converter</h1>
+
+  <!-- Age to Days Converter -->
+  <section class="tool" id="age-to-days">
+    <h2 >Age ➜ Days Converter</h2>
+    <label for="ageYears">Enter age (years):</label>
+    <input type="number" id="ageYears" min="0" placeholder="e.g. 25" />
+    <button onclick="convertAgeToDays()">Convert</button>
+    <div class="output" id="ageDaysOutput"></div>
+  </section>
+<h1 style="margin-left: 110px; ">Hours to Seconds Converter</h1>
+  <!-- Hours to Seconds Converter -->
+  <section class="tool" id="hours-to-seconds">
+    <h2>Hours ➜ Seconds Converter</h2>
+    <label for="hoursInput">Enter hours:</label>
+    <input type="number" id="hoursInput" min="0" placeholder="e.g. 3" />
+    <button onclick="convertHoursToSeconds()">Convert</button>
+    <div class="output" id="secondsOutput"></div>
+  </section>
+
+
+  <!-- BMI Calculator -->
+   <h1 style="margin-left: 210px; ">Bmi Calculator</h1>
+  <section class="tool" id="bmi">
+    <h2  >BMI Calculator</h2>
+    <label for="weightInput">Weight (kg):</label>
+    <input type="number" id="weightInput" min="1" placeholder="e.g. 70" />
+    <label for="heightInput">Height (m):</label>
+    <input type="number" id="heightInput" step="0.01" min="0.5" placeholder="e.g. 1.75" />
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <div class="output" id="bmiOutput"></div>
+  </section>
+
+  
+ 
+
+  <script>
+    /* ---------- 1. Age to Days ---------- */
+    function convertAgeToDays(){
+      const years = parseFloat(document.getElementById('ageYears').value);
+      const output = document.getElementById('ageDaysOutput');
+      if(isNaN(years) || years < 0){
+        output.textContent = 'Please enter a valid non‑negative number.';
+        return;
+      }
+      const days = years * 365; // approximation
+      output.textContent = years + ' years are roughly ' + days + ' days.';
+    }
+
+    /* ---------- 2. Hours to Seconds ---------- */
+    function convertHoursToSeconds(){
+      const hours = parseFloat(document.getElementById('hoursInput').value);
+      const output = document.getElementById('secondsOutput');
+      if(isNaN(hours) || hours < 0){
+        output.textContent = 'Please enter a valid non‑negative number.';
+        return;
+      }
+      const seconds = hours * 3600;
+      output.textContent = hours + ' hours = ' + seconds + ' seconds.';
+    }
+    /* ---------- 5. BMI ---------- */
+    function calculateBMI(){
+      const w = parseFloat(document.getElementById('weightInput').value);
+      const h = parseFloat(document.getElementById('heightInput').value);
+      const output = document.getElementById('bmiOutput');
+
+      if(isNaN(w) || isNaN(h) || w<=0 || h<=0){
+        output.textContent = 'Please enter valid positive numbers.';
+        return;
+      }
+
+      const bmi = w / (h*h);
+      output.textContent = 'Your BMI is ' + bmi.toFixed(1);
+    }
+
+  
+
+    input2.addEventListener('input', () => {
+      const n1 = Number(input1.value);
+      const n2 = Number(input2.value);
+      const sum = n1 + n2;
+      resultBox.value = isNaN(sum) ? 'NaN' : sum;
+    });
+  </script>
+</body>
+</html>

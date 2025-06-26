@@ -1,0 +1,49 @@
+
+    :root{
+      font-family: Arial, sans-serif;
+    }
+    body{
+      margin:0;
+      padding:2rem;
+      background:#f4f6f8;
+    margin-left: 300px;
+    background: blueviolet;
+    }
+    h2{
+      margin-top:2rem;
+    }
+    .tool{
+      background:#ffffff;
+      border-radius:8px;
+      padding:1rem 1.5rem;
+      box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      max-width:600px;
+      margin-bottom:1.5rem;
+    }
+    label{
+      display:block;
+      margin-top:.5rem;
+    }
+    input{
+      width:100%;
+      padding:.5rem;
+      margin-top:.25rem;
+      border:1px solid #ccc;
+      border-radius:4px;
+    }
+    button{
+      margin-top:1rem;
+      padding:.5rem 1rem;
+      border:none;
+      background:#103459;
+      color:#fff;
+      border-radius:4px;
+      cursor:pointer;
+    }
+    button:hover{
+      opacity:.9;
+    }
+    .output{
+      margin-top:.5rem;
+      font-weight:bold;
+    }
