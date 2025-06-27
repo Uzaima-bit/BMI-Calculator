@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css">
   <title>JavaScript Utility Toolkit</title>
- 
+
 </head>
+
 <body>
 
-  <h1 style="margin-left: 140px;" >Age to Days Converter</h1>
+  <h1 style="margin-left: 140px;">Age to Days Converter</h1>
 
   <!-- Age to Days Converter -->
   <section class="tool" id="age-to-days">
-    <h2 >Age ➜ Days Converter</h2>
+    <h2>Age ➜ Days Converter</h2>
     <label for="ageYears">Enter age (years):</label>
     <input type="number" id="ageYears" min="0" placeholder="e.g. 25" />
     <button onclick="convertAgeToDays()">Convert</button>
     <div class="output" id="ageDaysOutput"></div>
   </section>
-<h1 style="margin-left: 110px; ">Hours to Seconds Converter</h1>
+  <h1 style="margin-left: 110px; ">Hours to Seconds Converter</h1>
   <!-- Hours to Seconds Converter -->
   <section class="tool" id="hours-to-seconds">
     <h2>Hours ➜ Seconds Converter</h2>
@@ -31,9 +33,9 @@
 
 
   <!-- BMI Calculator -->
-   <h1 style="margin-left: 210px; ">Bmi Calculator</h1>
+  <h1 style="margin-left: 210px; ">Bmi Calculator</h1>
   <section class="tool" id="bmi">
-    <h2  >BMI Calculator</h2>
+    <h2>BMI Calculator</h2>
     <label for="weightInput">Weight (kg):</label>
     <input type="number" id="weightInput" min="1" placeholder="e.g. 70" />
     <label for="heightInput">Height (m):</label>
@@ -41,16 +43,56 @@
     <button onclick="calculateBMI()">Calculate BMI</button>
     <div class="output" id="bmiOutput"></div>
   </section>
+  <!-- Next Number Finder -->
+  <h1 style="margin-left: 150px; ">Find the Next Number</h1>
+  <section class="tool" id="next-number">
+    <h2>Find the Next Number</h2>
+    <h3>Scenario 1: In an Array</h3>
+    <label for="arrayInput">Enter array (comma‑separated):</label>
+    <input type="text" id="arrayInput" placeholder="e.g. 1,5,9,12" />
+    <label for="targetNumber">Number to search for:</label>
+    <input type="number" id="targetNumber" placeholder="e.g. 9" />
+    <button onclick="findNextInArray()">Find Next</button>
+    <div class="output" id="arrayNextOutput"></div>
 
-  
- 
+    <hr style="margin:2rem 0" />
+
+    <h3>Scenario 2: Single Value</h3>
+    <label for="singleValue">Enter a single value (int or float):</label>
+    <input type="text" id="singleValue" placeholder="e.g. 7 or 7.2" />
+    <button onclick="findNextSingle()">Find Next</button>
+    <div class="output" id="singleNextOutput"></div>
+  </section>
+
+  <!-- Name Capitalisation -->
+  <h1 style="margin-left: 150px; ">Capitalise Your Name</h1>
+  <section class="tool" id="name-format">
+    <h2>Capitalise Your Name</h2>
+    <label for="nameInput">Enter your name (lowercase):</label>
+    <input type="text" id="nameInput" placeholder="e.g. john" />
+    <button onclick="capitaliseName()">Capitalise</button>
+    <div class="output" id="nameOutput"></div>
+  </section>
+  <!-- Live Addition -->
+  <h1 style="margin-left: 190px; ">Live Addition</h1>
+  <section class="tool" id="live-add">
+    <h2>Live Addition</h2>
+    <label for="addInput1">Input 1:</label>
+    <input type="number" id="addInput1" placeholder="e.g. 5" />
+    <label for="addInput2">Input 2:</label>
+    <input type="number" id="addInput2" placeholder="e.g. 10" />
+    <label for="addResult">Result:</label>
+    <input type="text" id="addResult" readonly placeholder="NaN" />
+  </section>
+
+
 
   <script>
     /* ---------- 1. Age to Days ---------- */
-    function convertAgeToDays(){
+    function convertAgeToDays() {
       const years = parseFloat(document.getElementById('ageYears').value);
       const output = document.getElementById('ageDaysOutput');
-      if(isNaN(years) || years < 0){
+      if (isNaN(years) || years < 0) {
         output.textContent = 'Please enter a valid non‑negative number.';
         return;
       }
@@ -59,10 +101,10 @@
     }
 
     /* ---------- 2. Hours to Seconds ---------- */
-    function convertHoursToSeconds(){
+    function convertHoursToSeconds() {
       const hours = parseFloat(document.getElementById('hoursInput').value);
       const output = document.getElementById('secondsOutput');
-      if(isNaN(hours) || hours < 0){
+      if (isNaN(hours) || hours < 0) {
         output.textContent = 'Please enter a valid non‑negative number.';
         return;
       }
@@ -70,21 +112,21 @@
       output.textContent = hours + ' hours = ' + seconds + ' seconds.';
     }
     /* ---------- 5. BMI ---------- */
-    function calculateBMI(){
+    function calculateBMI() {
       const w = parseFloat(document.getElementById('weightInput').value);
       const h = parseFloat(document.getElementById('heightInput').value);
       const output = document.getElementById('bmiOutput');
 
-      if(isNaN(w) || isNaN(h) || w<=0 || h<=0){
+      if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
         output.textContent = 'Please enter valid positive numbers.';
         return;
       }
 
-      const bmi = w / (h*h);
+      const bmi = w / (h * h);
       output.textContent = 'Your BMI is ' + bmi.toFixed(1);
     }
 
-  
+
 
     input2.addEventListener('input', () => {
       const n1 = Number(input1.value);
@@ -92,6 +134,60 @@
       const sum = n1 + n2;
       resultBox.value = isNaN(sum) ? 'NaN' : sum;
     });
+
+    /* ---------- 3‑B. Find Next for Single Value ---------- */
+    function findNextSingle() {
+      const valStr = document.getElementById('singleValue').value.trim();
+      const output = document.getElementById('singleNextOutput');
+      if (valStr === '') {
+        output.textContent = 'Please enter a value.';
+        return;
+      }
+
+      const num = Number(valStr);
+      if (isNaN(num)) {
+        output.textContent = 'Invalid number.';
+        return;
+      }
+
+      const isInteger = Number.isInteger(num);
+      const next = isInteger ? num + 1 : num + Number.EPSILON;
+      output.textContent = 'Next number is ' + next + ' (' + (isInteger ? 'integer' : 'float') + ').';
+    }
+
+    /* ---------- 4. Capitalise Name ---------- */
+    function capitaliseName() {
+      const name = document.getElementById('nameInput').value.trim();
+      const output = document.getElementById('nameOutput');
+      if (!name) {
+        output.textContent = 'Please enter your name.';
+        return;
+      }
+      const capName = name[0].toUpperCase() + name.slice(1);
+      output.textContent = 'Hello, ' + capName + '!';
+    }
+
+    /* ---------- 7. Live Addition ---------- */
+    const input1 = document.getElementById('addInput1');
+    const input2 = document.getElementById('addInput2');
+    const resultBox = document.getElementById('addResult');
+
+    // Initially NaN
+    resultBox.value = 'NaN';
+
+    input1.addEventListener('input', () => {
+      resultBox.value = 'NaN';
+    });
+
+    input2.addEventListener('input', () => {
+      const n1 = Number(input1.value);
+      const n2 = Number(input2.value);
+      const sum = n1 + n2;
+      resultBox.value = isNaN(sum) ? 'NaN' : sum;
+    });
+
+
   </script>
 </body>
+
 </html>
