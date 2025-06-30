@@ -11,9 +11,7 @@
 
 <body>
 
-  <h1 style="margin-left: 140px;">Age to Days Converter</h1>
-
-  <!-- Age to Days Converter -->
+   <!-- Age to Days Converter -->
   <section class="tool" id="age-to-days">
     <h2>Age ➜ Days Converter</h2>
     <label for="ageYears">Enter age (years):</label>
@@ -21,7 +19,7 @@
     <button onclick="convertAgeToDays()">Convert</button>
     <div class="output" id="ageDaysOutput"></div>
   </section>
-  <h1 style="margin-left: 110px; ">Hours to Seconds Converter</h1>
+
   <!-- Hours to Seconds Converter -->
   <section class="tool" id="hours-to-seconds">
     <h2>Hours ➜ Seconds Converter</h2>
@@ -31,20 +29,7 @@
     <div class="output" id="secondsOutput"></div>
   </section>
 
-
-  <!-- BMI Calculator -->
-  <h1 style="margin-left: 210px; ">Bmi Calculator</h1>
-  <section class="tool" id="bmi">
-    <h2>BMI Calculator</h2>
-    <label for="weightInput">Weight (kg):</label>
-    <input type="number" id="weightInput" min="1" placeholder="e.g. 70" />
-    <label for="heightInput">Height (m):</label>
-    <input type="number" id="heightInput" step="0.01" min="0.5" placeholder="e.g. 1.75" />
-    <button onclick="calculateBMI()">Calculate BMI</button>
-    <div class="output" id="bmiOutput"></div>
-  </section>
   <!-- Next Number Finder -->
-  <h1 style="margin-left: 150px; ">Find the Next Number</h1>
   <section class="tool" id="next-number">
     <h2>Find the Next Number</h2>
     <h3>Scenario 1: In an Array</h3>
@@ -55,7 +40,7 @@
     <button onclick="findNextInArray()">Find Next</button>
     <div class="output" id="arrayNextOutput"></div>
 
-    <hr style="margin:2rem 0" />
+    <hr style="margin:2rem 0"/>
 
     <h3>Scenario 2: Single Value</h3>
     <label for="singleValue">Enter a single value (int or float):</label>
@@ -65,7 +50,6 @@
   </section>
 
   <!-- Name Capitalisation -->
-  <h1 style="margin-left: 150px; ">Capitalise Your Name</h1>
   <section class="tool" id="name-format">
     <h2>Capitalise Your Name</h2>
     <label for="nameInput">Enter your name (lowercase):</label>
@@ -73,8 +57,27 @@
     <button onclick="capitaliseName()">Capitalise</button>
     <div class="output" id="nameOutput"></div>
   </section>
+
+  <!-- BMI Calculator -->
+  <section class="tool" id="bmi">
+    <h2>BMI Calculator</h2>
+    <label for="weightInput">Weight (kg):</label>
+    <input type="number" id="weightInput" min="1" placeholder="e.g. 70" />
+    <label for="heightInput">Height (m):</label>
+    <input type="number" id="heightInput" step="0.01" min="0.5" placeholder="e.g. 1.75" />
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <div class="output" id="bmiOutput"></div>
+  </section>
+
+  <!-- Random Array Picker -->
+  <section class="tool" id="random-array">
+    <h2>Random Array – First &amp; Last Element</h2>
+    <button onclick="generateRandomArray()">Generate Array</button>
+    <div class="output" id="randArrayDisplay"></div>
+    <div class="output" id="randArrayResult"></div>
+  </section>
+
   <!-- Live Addition -->
-  <h1 style="margin-left: 190px; ">Live Addition</h1>
   <section class="tool" id="live-add">
     <h2>Live Addition</h2>
     <label for="addInput1">Input 1:</label>
@@ -85,14 +88,12 @@
     <input type="text" id="addResult" readonly placeholder="NaN" />
   </section>
 
-
-
-  <script>
+   <script>
     /* ---------- 1. Age to Days ---------- */
-    function convertAgeToDays() {
+    function convertAgeToDays(){
       const years = parseFloat(document.getElementById('ageYears').value);
       const output = document.getElementById('ageDaysOutput');
-      if (isNaN(years) || years < 0) {
+      if(isNaN(years) || years < 0){
         output.textContent = 'Please enter a valid non‑negative number.';
         return;
       }
@@ -101,70 +102,98 @@
     }
 
     /* ---------- 2. Hours to Seconds ---------- */
-    function convertHoursToSeconds() {
+    function convertHoursToSeconds(){
       const hours = parseFloat(document.getElementById('hoursInput').value);
       const output = document.getElementById('secondsOutput');
-      if (isNaN(hours) || hours < 0) {
+      if(isNaN(hours) || hours < 0){
         output.textContent = 'Please enter a valid non‑negative number.';
         return;
       }
       const seconds = hours * 3600;
       output.textContent = hours + ' hours = ' + seconds + ' seconds.';
     }
-    /* ---------- 5. BMI ---------- */
-    function calculateBMI() {
-      const w = parseFloat(document.getElementById('weightInput').value);
-      const h = parseFloat(document.getElementById('heightInput').value);
-      const output = document.getElementById('bmiOutput');
 
-      if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
-        output.textContent = 'Please enter valid positive numbers.';
+    /* ---------- 3‑A. Find Next in Array ---------- */
+    function findNextInArray(){
+      const arrStr = document.getElementById('arrayInput').value.trim();
+      const targetStr = document.getElementById('targetNumber').value.trim();
+      const output = document.getElementById('arrayNextOutput');
+
+      if(!arrStr || targetStr===''){
+        output.textContent = 'Please fill both fields.';
         return;
       }
 
-      const bmi = w / (h * h);
-      output.textContent = 'Your BMI is ' + bmi.toFixed(1);
+      const arr = arrStr.split(',').map(Number);
+      const target = Number(targetStr);
+      const idx = arr.indexOf(target);
+
+      if(idx === -1){
+        output.textContent = target + ' is not in the array.';
+      }else if(idx === arr.length-1){
+        output.textContent = target + ' is the last element; no next number.';
+      }else{
+        output.textContent = 'Next number is ' + arr[idx+1] + '.';
+      }
     }
 
-
-
-    input2.addEventListener('input', () => {
-      const n1 = Number(input1.value);
-      const n2 = Number(input2.value);
-      const sum = n1 + n2;
-      resultBox.value = isNaN(sum) ? 'NaN' : sum;
-    });
-
     /* ---------- 3‑B. Find Next for Single Value ---------- */
-    function findNextSingle() {
+    function findNextSingle(){
       const valStr = document.getElementById('singleValue').value.trim();
       const output = document.getElementById('singleNextOutput');
-      if (valStr === '') {
+      if(valStr===''){
         output.textContent = 'Please enter a value.';
         return;
       }
 
       const num = Number(valStr);
-      if (isNaN(num)) {
+      if(isNaN(num)){
         output.textContent = 'Invalid number.';
         return;
       }
 
       const isInteger = Number.isInteger(num);
       const next = isInteger ? num + 1 : num + Number.EPSILON;
-      output.textContent = 'Next number is ' + next + ' (' + (isInteger ? 'integer' : 'float') + ').';
+      output.textContent = 'Next number is ' + next + ' (' + (isInteger ? 'integer':'float') + ').';
     }
 
-    /* ---------- 4. Capitalise Name ---------- */
-    function capitaliseName() {
-      const name = document.getElementById('nameInput').value.trim();
+     /* ---------- 4. Capitalise Name ---------- */
+    function capitaliseName(){
+      const input = document.getElementById('nameInput').value.trim();
       const output = document.getElementById('nameOutput');
-      if (!name) {
-        output.textContent = 'Please enter your name.';
+      if(!input){
+        output.textContent = 'Please enter your full name.';
         return;
       }
-      const capName = name[0].toUpperCase() + name.slice(1);
-      output.textContent = 'Hello, ' + capName + '!';
+      // Split by whitespace, capitalise each part, then join
+      const capName = input.split(/\s+/).map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+      output.textContent = `Hello, ${capName}!`;
+    }
+
+    /* ---------- 5. BMI ---------- */
+    function calculateBMI(){
+      const w = parseFloat(document.getElementById('weightInput').value);
+      const h = parseFloat(document.getElementById('heightInput').value);
+      const output = document.getElementById('bmiOutput');
+
+      if(isNaN(w) || isNaN(h) || w<=0 || h<=0){
+        output.textContent = 'Please enter valid positive numbers.';
+        return;
+      }
+
+      const bmi = w / (h*h);
+      output.textContent = 'Your BMI is ' + bmi.toFixed(1);
+    }
+
+    /* ---------- 6. Random Array & First/Last ---------- */
+    let currentRandomArray = [];
+    function generateRandomArray(){
+      const len = Math.floor(Math.random()*6)+5; // 5‑10
+      currentRandomArray = Array.from({length:len}, () => Math.floor(Math.random()*100)+1);
+      document.getElementById('randArrayDisplay').textContent = 'Generated: [' + currentRandomArray.join(', ') + ']';
+      const first = currentRandomArray[0];
+      const last = currentRandomArray[currentRandomArray.length-1];
+      document.getElementById('randArrayResult').textContent = 'First: ' + first + ', Last: ' + last;
     }
 
     /* ---------- 7. Live Addition ---------- */
@@ -185,9 +214,6 @@
       const sum = n1 + n2;
       resultBox.value = isNaN(sum) ? 'NaN' : sum;
     });
-
-
   </script>
 </body>
-
 </html>
